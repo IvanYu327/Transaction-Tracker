@@ -14,3 +14,7 @@ This was a personal project to teach myself SQL syntax and how to use popular SQ
 
 # Displaying database
 ![image](https://user-images.githubusercontent.com/85257356/136735560-9b58ee5e-a381-4986-8546-8e6771506e6b.png)
+
+#MySQL Workbench
+My first time working with SQL and MySQL, super fun and learned a lot!
+![image](https://user-images.githubusercontent.com/85257356/136736632-01c8666a-f25b-41cc-b7be-08f40b35762c.png)
