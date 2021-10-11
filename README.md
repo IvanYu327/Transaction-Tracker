@@ -12,5 +12,5 @@ Personal project to teach myself SQL syntax and how to use popular SQL databases
 ![image](https://user-images.githubusercontent.com/85257356/136735172-4dd32650-3b07-403c-936e-5c22d4118dcf.png)
 
 
-# Displaying databse
+# Displaying database
 ![image](https://user-images.githubusercontent.com/85257356/136735560-9b58ee5e-a381-4986-8546-8e6771506e6b.png)
