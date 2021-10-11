@@ -154,15 +154,17 @@ def access_account():
             headings = ["ID","Date","Category","Amount","Payment Method"]
             print(headings[0].ljust(5," "), end = '')
             print(headings[1].ljust(15," "), end = '')
-            print(headings[2].ljust(15," "), end = '')
-            print(headings[3].ljust(10," "), end = '')
+            print(headings[2].ljust(10," "), end = '')
+            print(headings[3].rjust(10," "), end = '')
+            print("  ", end = '')
             print(headings[4].ljust(15," "))
             
             for result in results:
                 print(str(result[0]).ljust(5," "), end = '')
                 print(str(result[1]).ljust(15," "), end = '')
-                print(str(result[2]).ljust(15," "), end = '')
-                print(str(result[3]).ljust(7," "), end = '')
+                print(str(result[2]).ljust(10," "), end = '')
+                print(str("{:.2f}".format(result[3])).rjust(10," "), end = '')
+                print("  ", end = '')
                 print(str(result[4]).ljust(15," "))
             
             print("")
@@ -180,13 +182,16 @@ def access_account():
                 
                 id = int(tempMaxID)+1
         
-            print(id)
+            print("")
             print("Please enter a date in the format YYYY-MM-DD")
             date = input("Date: ")
+            print("")
             print("Please enter the category this transaction is in (ex: food,entertainement,rent)")
             category = input("Category: ").lower()
+            print("")
             print("Please enter the amount in $CAD")
             amount = input("Amount: ")
+            print("")
             print("Please enter the payment method used (ex: cash,MasterCard,cheque)")
             payment_method = input("Payment method: ").lower()
             print("")
