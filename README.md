@@ -1,7 +1,7 @@
 # Transaction-Tracker
 Simple CLI for users to create accounts and to log records of their transactions and the details such as dates, amount, category, and payment methods, stored in a MySQL database.
 
-Personal project to teach myself SQL syntax and how to use popular SQL databases like MySQL and integrating it with other lagnuages like Python.
+This was a personal project to teach myself SQL syntax and how to use popular SQL databases like MySQL and integrating it with other languages like Python.
 
 # Main Menu
 ![image](https://user-images.githubusercontent.com/85257356/136735017-d4c9c4d9-c26a-47a7-bb18-417b4b274a1b.png)
