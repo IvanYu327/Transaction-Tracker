@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
-import queryCommands as qc
+import SQL_Queries as sqlq
 import time
 
 from dotenv import load_dotenv
@@ -12,7 +12,7 @@ SQL_KEY = getenv("SQL")
 import os
 clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
 
-#Creates the database - only needs to be ran once :P
+# Creates the database - only needed to be ran once :P
 
 # def create_server_connection(host_name, user_name, user_password):
 #     connection = None
@@ -59,8 +59,7 @@ def create_db_connection(host_name, user_name, user_password, db_name):
 
 connection = create_db_connection("localhost", "root", SQL_KEY,"user_transaction_program") # Connect to the Database
 
-
-
+#do something to the MySQL database
 def execute_query(connection, query):
     cursor = connection.cursor()
     try:
@@ -70,9 +69,11 @@ def execute_query(connection, query):
         return True
 
     except Error as err:
+        print(err)
         cursor.close() 
         return False
 
+#read something to the MySQL database
 def read_query(connection, query):
     cursor = connection.cursor()
     result = None
@@ -98,12 +99,11 @@ def menu():
 def create_account():
     print("Create a new account.\n")
     username = input("Enter your username: ").lower()
-    if execute_query(connection, qc.create_user_table(username)):
+    if execute_query(connection, sqlq.create_user_table(username)):
         print(f"New account succesfully created called {username}")
     else:
         print("That user already exists or there was an error.")
     print("Returning to menu ... ")
-
 
 def checkTableExists(tablename):
     dbcur = connection.cursor()
@@ -119,8 +119,6 @@ def checkTableExists(tablename):
     dbcur.close()
     return False
 
-
-
 def access_account():  
     exit = False
     userInput=""
@@ -130,6 +128,7 @@ def access_account():
         print("Access existing accounts.\n")
         username = input("Enter your username: ").lower()
         clearConsole()    
+        
         if checkTableExists(username):
             print(f"Account found for [{username}]:")
             print("[V] - View all")
@@ -146,18 +145,42 @@ def access_account():
         if userInput == "q":
             print("Returning to main menu ... ")
             exit = True
+        
         elif userInput == "v":
-            results = qc.full_user_table(username)
+            print("")
+            
+            results = read_query(connection,sqlq.full_user_table(username))
 
+            headings = ["ID","Date","Category","Amount","Payment Method"]
+            print(headings[0].ljust(5," "), end = '')
+            print(headings[1].ljust(15," "), end = '')
+            print(headings[2].ljust(15," "), end = '')
+            print(headings[3].ljust(10," "), end = '')
+            print(headings[4].ljust(15," "))
+            
             for result in results:
-                print(result)
+                print(str(result[0]).ljust(5," "), end = '')
+                print(str(result[1]).ljust(15," "), end = '')
+                print(str(result[2]).ljust(15," "), end = '')
+                print(str(result[3]).ljust(7," "), end = '')
+                print(str(result[4]).ljust(15," "))
+            
+            print("")
+            input("Press enter to return.")
+            
         elif userInput == "i":
-            maxID = execute_query(connection,qc.get_max_ID(username))
+            maxID = read_query(connection,sqlq.get_max_ID(username))
 
-            print (maxID)
-            
-            
-            id = maxID+1
+            if str(maxID[0]) == "(None,)":
+                id = 1
+            else:
+                tempMaxID = str(maxID[0])
+                for character in "(,)":
+                    tempMaxID = tempMaxID.replace(character, "")
+                
+                id = int(tempMaxID)+1
+        
+            print(id)
             print("Please enter a date in the format YYYY-MM-DD")
             date = input("Date: ")
             print("Please enter the category this transaction is in (ex: food,entertainement,rent)")
@@ -166,14 +189,16 @@ def access_account():
             amount = input("Amount: ")
             print("Please enter the payment method used (ex: cash,MasterCard,cheque)")
             payment_method = input("Payment method: ").lower()
+            print("")
 
-            if execute_query(connection, qc.insert(username,id,date,category,amount,payment_method)):
-                print("Insert Success!")
+            if execute_query(connection, sqlq.insert(username,id,date,category,amount,payment_method)):
+                print("\nInsert Success!")
+                print("Returning to menu...")
+                time.sleep(5)
             else:
                 print("Insert failed or invalid inputs")
                 print("Returning to main menu ... ")
                 exit = True
-
 
 def main ():
     exit = False
@@ -194,6 +219,5 @@ def main ():
             access_account()
             time.sleep(3)
             clearConsole()
-
 
 main()
