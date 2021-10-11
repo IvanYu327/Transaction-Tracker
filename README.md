@@ -17,4 +17,5 @@ This was a personal project to teach myself SQL syntax and how to use popular SQ
 
 # MySQL Workbench
 My first time working with SQL and MySQL, super fun and learned a lot!
+
 ![image](https://user-images.githubusercontent.com/85257356/136736632-01c8666a-f25b-41cc-b7be-08f40b35762c.png)
