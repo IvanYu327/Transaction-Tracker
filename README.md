@@ -13,7 +13,7 @@ This was a personal project to teach myself SQL syntax and how to use popular SQ
 
 
 # Displaying database
-![image](https://user-images.githubusercontent.com/85257356/136735560-9b58ee5e-a381-4986-8546-8e6771506e6b.png)
+![image](https://user-images.githubusercontent.com/85257356/136736824-38ad587f-17b2-4f20-acff-b6e206a877c1.png)
 
 # MySQL Workbench
 My first time working with SQL and MySQL, super fun and learned a lot!
